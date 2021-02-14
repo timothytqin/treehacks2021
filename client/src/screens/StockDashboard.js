@@ -13,6 +13,7 @@ import { Grid, Typography } from "@material-ui/core";
 import { firestore } from "../firebase/firebase";
 
 import Score from "../components/Score";
+import { TYPOGRAPHY, PRIMARY_COLOR } from "../globalStyles";
 
 export default function StockDashboard(props) {
   const [data, setData] = useState([]);
@@ -35,11 +36,6 @@ export default function StockDashboard(props) {
   }, []);
 
   const styles = {
-    typography: {
-      fontFamily: "Montserrat",
-      fontWeight: "bold",
-      fontSize: 18,
-    },
     tickerName: {
       fontSize: 44,
       lineHeight: 1,
@@ -54,7 +50,7 @@ export default function StockDashboard(props) {
       marginRight: 20,
     },
     change: {
-      color: "#5BC096",
+      color: PRIMARY_COLOR,
     },
   };
 
@@ -70,18 +66,18 @@ export default function StockDashboard(props) {
       <Grid container direction="row">
         <Grid item style={{ flex: 1 }}>
           <Grid container item style={{ alignItems: "flex-end" }}>
-            <Typography style={{ ...styles.typography, ...styles.tickerName }}>
+            <Typography style={{ ...TYPOGRAPHY, ...styles.tickerName }}>
               DOW Jones
             </Typography>
-            <Typography style={{ ...styles.typography, ...styles.subscript }}>
+            <Typography style={{ ...TYPOGRAPHY, ...styles.subscript }}>
               Dow Jones Industrial Average
             </Typography>
           </Grid>
           <Grid container item style={{ marginTop: 20 }}>
-            <Typography style={{ ...styles.typography, ...styles.value }}>
+            <Typography style={{ ...TYPOGRAPHY, ...styles.value }}>
               31,458.40
             </Typography>
-            <Typography style={{ ...styles.typography, ...styles.change }}>
+            <Typography style={{ ...TYPOGRAPHY, ...styles.change }}>
               +27.70
             </Typography>
           </Grid>
@@ -98,8 +94,8 @@ export default function StockDashboard(props) {
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#5BC096" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#5BC096" stopOpacity={0} />
+            <stop offset="5%" stopColor={PRIMARY_COLOR} stopOpacity={0.8} />
+            <stop offset="95%" stopColor={PRIMARY_COLOR} stopOpacity={0} />
           </linearGradient>
         </defs>
         <XAxis dataKey="time" type="number" />
@@ -109,7 +105,7 @@ export default function StockDashboard(props) {
         <Area
           type="monotone"
           dataKey="price"
-          stroke="#5BC096"
+          stroke={PRIMARY_COLOR}
           fillOpacity={1}
           fill="url(#colorUv)"
         />
