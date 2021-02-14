@@ -38,10 +38,9 @@ export default function StockDashboard(props) {
           return new Date(a.time) < new Date(b.time) ? -1 : 1;
         });
 
-        console.log(tempData);
         setData(tempData);
       });
-  }, []);
+  }, [props.ticker]);
 
   const styles = {
     tickerName: {
@@ -98,7 +97,7 @@ export default function StockDashboard(props) {
             width={window.innerWidth * 0.55}
             height={350}
             data={data}
-            margin={{ top: 50, right: 70, left: -20, bottom: 0 }}
+            margin={{ top: 50 }}
           >
             <defs>
               <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -106,7 +105,7 @@ export default function StockDashboard(props) {
                 <stop offset="95%" stopColor={PRIMARY_COLOR} stopOpacity={0} />
               </linearGradient>
             </defs>
-            <XAxis dataKey="time" type="number" />
+            <XAxis dataKey="time" type="category" />
             <YAxis />
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip />

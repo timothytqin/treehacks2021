@@ -5,8 +5,10 @@ import { Grid, Typography } from "@material-ui/core";
 import { TYPOGRAPHY, PRIMARY_COLOR } from "../style/css/globalStyles";
 
 import TinyChartListItem from "./TinyChartListItem";
+import { CallMerge } from "@material-ui/icons";
 
 export default function ListItem(props) {
+  const { ticker, data, onClick } = props;
   const styles = {
     background: {
       backgroundColor: "#F3F3F3",
@@ -31,7 +33,14 @@ export default function ListItem(props) {
   };
 
   return (
-    <Grid container item style={styles.background}>
+    <Grid
+      container
+      item
+      style={styles.background}
+      onClick={() => {
+        onClick(ticker);
+      }}
+    >
       <Grid
         container
         style={{
@@ -66,7 +75,7 @@ export default function ListItem(props) {
             ...styles.name,
           }}
         >
-          Dow Jones
+          {ticker}
         </Typography>
         <Typography
           style={{

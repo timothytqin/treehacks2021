@@ -4,6 +4,7 @@ import ListItem from "../components/ListItem";
 import ListSearchBar from "../components/ListSearchBar";
 
 export default function StockList(props) {
+  const { data, selector } = props;
   const styles = {
     background: {
       flexDirection: "column",
@@ -20,22 +21,15 @@ export default function StockList(props) {
         }}
       >
         <Grid container item style={styles.background}>
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
+          {Object.keys(data).map((ticker) => {
+            return (
+              <ListItem
+                ticker={ticker}
+                data={data[ticker]}
+                onClick={selector}
+              />
+            );
+          })}
         </Grid>
       </Box>
     </Grid>
