@@ -228,6 +228,20 @@ export default function StockDashboard(props) {
             title={"Melon Lord"}
             timestamp={"9h ago"}
           />
+          <Article
+            imgSrc={
+              "https://www.pngitem.com/pimgs/m/549-5490862_transparent-melon-clipart-clip-art-watermelon-hd-png.png"
+            }
+            title={"Melon Lord"}
+            timestamp={"9h ago"}
+          />
+          <Article
+            imgSrc={
+              "https://www.pngitem.com/pimgs/m/549-5490862_transparent-melon-clipart-clip-art-watermelon-hd-png.png"
+            }
+            title={"Melon Lord"}
+            timestamp={"9h ago"}
+          />
         </Grid>
       </Grid>
     </Box>

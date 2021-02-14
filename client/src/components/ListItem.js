@@ -9,7 +9,7 @@ import TinyChartListItem from "./TinyChartListItem";
 import { CallMerge } from "@material-ui/icons";
 
 export default function ListItem(props) {
-  const { ticker, name, data, onClick } = props;
+  const { ticker, name, score, data, onClick } = props;
   const styles = {
     background: {
       backgroundColor: "#F3F3F3",
@@ -18,7 +18,6 @@ export default function ListItem(props) {
     },
     score: {
       fontSize: 36,
-      color: PRIMARY_COLOR,
     },
     name: {
       fontSize: 14,
@@ -52,9 +51,10 @@ export default function ListItem(props) {
           style={{
             ...TYPOGRAPHY,
             ...styles.score,
+            color: score <= 50 ? "#f00" : score <= 70 ? "#fc0" : PRIMARY_COLOR,
           }}
         >
-          90
+          {score}
         </Typography>
       </Grid>
 

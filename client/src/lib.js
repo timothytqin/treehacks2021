@@ -9,3 +9,7 @@ export const getPriceChange = (data) => {
     data[keys[keys.length - 1]].closing_price - data[keys[0]].closing_price
   ).toFixed(2);
 };
+
+export const getRandInt = (min, max) => {
+  return parseInt(Math.random() * (max - min + 1) + min);
+};

@@ -1,8 +1,11 @@
 import { Grid, Typography } from "@material-ui/core";
+import { useState } from "react";
 import { TYPOGRAPHY, PRIMARY_COLOR } from "../style/css/globalStyles";
+import Popup from "./Popup";
 
 export default function Article(props) {
   const { imgSrc, title, timestamp } = props;
+  const [visible, setVisible] = useState(false);
   const styles = {
     container: {
       padding: 10,
@@ -33,31 +36,39 @@ export default function Article(props) {
   };
 
   return (
-    <Grid
-      container
-      style={{ ...styles.container, borderColor: `#${getRandColor()}` }}
-    >
-      <Grid>
-        <img src={imgSrc} style={styles.img} />
+    <>
+      <Grid
+        container
+        style={{ ...styles.container, borderColor: `#${getRandColor()}` }}
+        onClick={() => setVisible(true)}
+      >
+        <Grid>
+          <img src={imgSrc} style={styles.img} />
+        </Grid>
+        <Grid>
+          <Typography
+            style={{
+              ...TYPOGRAPHY,
+              ...styles.title,
+            }}
+          >
+            {title}
+          </Typography>
+          <Typography
+            style={{
+              ...TYPOGRAPHY,
+              ...styles.time,
+            }}
+          >
+            {timestamp}
+          </Typography>
+        </Grid>
       </Grid>
-      <Grid>
-        <Typography
-          style={{
-            ...TYPOGRAPHY,
-            ...styles.title,
-          }}
-        >
-          {title}
-        </Typography>
-        <Typography
-          style={{
-            ...TYPOGRAPHY,
-            ...styles.time,
-          }}
-        >
-          {timestamp}
-        </Typography>
-      </Grid>
-    </Grid>
+      <Popup
+        visible={visible}
+        setVisible={setVisible}
+        article={(imgSrc, title, timestamp)}
+      />
+    </>
   );
 }

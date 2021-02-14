@@ -14,13 +14,14 @@ export default function StockList(props) {
 
   const [search, setSearch] = useState("");
 
-  const getFilteredStocks = () => {
-    const res = Object.keys(data).filter(
-      (ticker) =>
-        ticker.toLowerCase().includes(search.toLowerCase()) ||
-        data[ticker].details.name.toLowerCase().includes(search.toLowerCase())
-    );
-    console.log(res);
+  const getFilteredAndSortedStocks = () => {
+    const res = Object.keys(data)
+      .filter(
+        (ticker) =>
+          ticker.toLowerCase().includes(search.toLowerCase()) ||
+          data[ticker].details.name.toLowerCase().includes(search.toLowerCase())
+      )
+      .sort((a, b) => (data[a].score > data[b].score ? -1 : 1));
     return res;
   };
 
@@ -34,11 +35,12 @@ export default function StockList(props) {
         }}
       >
         <Grid container item style={styles.background}>
-          {getFilteredStocks().map((ticker) => {
+          {getFilteredAndSortedStocks().map((ticker) => {
             return (
               <ListItem
                 ticker={ticker}
                 name={data[ticker].details.name}
+                score={data[ticker].score}
                 data={data[ticker]}
                 onClick={selector}
               />

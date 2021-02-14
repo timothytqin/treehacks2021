@@ -8,7 +8,6 @@ export default function Score(props) {
       width: 70,
       height: 70,
       borderRadius: 50,
-      backgroundColor: PRIMARY_COLOR,
       alignItems: "center",
       justifyContent: "center",
     },
@@ -28,7 +27,14 @@ export default function Score(props) {
 
   return (
     <Grid container style={{ alignItems: "center" }}>
-      <Grid container style={{ ...styles.circle }}>
+      <Grid
+        container
+        style={{
+          ...styles.circle,
+          backgroundColor:
+            score <= 50 ? "#f00" : score <= 80 ? "#fc0" : PRIMARY_COLOR,
+        }}
+      >
         <Typography
           style={{
             ...TYPOGRAPHY,
