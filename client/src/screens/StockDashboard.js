@@ -17,10 +17,12 @@ import Metric from "../components/Metric";
 import Article from "../components/Article";
 import { TYPOGRAPHY, PRIMARY_COLOR } from "../style/css/globalStyles";
 import { getCurrPrice, getPriceChange } from "../lib";
+import stonk from "../style/assets/stonks.jpg";
 
 export default function StockDashboard(props) {
   const [details, setDetails] = useState({});
   const [data, setData] = useState([]);
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     if (props.ticker) {
@@ -30,6 +32,7 @@ export default function StockDashboard(props) {
         .onSnapshot((doc) => {
           const docData = doc.data();
           setDetails(docData.details);
+          setArticles(docData.articles);
           let tempData = [];
           for (const timestamp in docData.time_data) {
             const newData = {};
@@ -201,53 +204,55 @@ export default function StockDashboard(props) {
             ]}
           />
         </Grid>
-        <Typography
-          style={{
-            ...TYPOGRAPHY,
-            textAlign: "left",
-            color: "#838383",
-            fontSize: 12,
-            marginTop: 20,
-            marginBottom: 20,
-          }}
-        >
-          Found Articles
-        </Typography>
-        <Grid container direction="row" style={{ display: "flex" }}>
-          <Article
-            imgSrc={
-              "https://www.pngitem.com/pimgs/m/549-5490862_transparent-melon-clipart-clip-art-watermelon-hd-png.png"
-            }
-            title={"Melon Lord"}
-            timestamp={"9h ago"}
-          />
-          <Article
-            imgSrc={
-              "https://www.pngitem.com/pimgs/m/549-5490862_transparent-melon-clipart-clip-art-watermelon-hd-png.png"
-            }
-            title={"Melon Lord"}
-            timestamp={"9h ago"}
-          />
-          <Article
-            imgSrc={
-              "https://www.pngitem.com/pimgs/m/549-5490862_transparent-melon-clipart-clip-art-watermelon-hd-png.png"
-            }
-            title={"Melon Lord"}
-            timestamp={"9h ago"}
-          />
-          <Article
-            imgSrc={
-              "https://www.pngitem.com/pimgs/m/549-5490862_transparent-melon-clipart-clip-art-watermelon-hd-png.png"
-            }
-            title={"Melon Lord"}
-            timestamp={"9h ago"}
-          />
-        </Grid>
+
+        {articles && (
+          <>
+            <Typography
+              style={{
+                ...TYPOGRAPHY,
+                textAlign: "left",
+                color: "#838383",
+                fontSize: 12,
+                marginTop: 20,
+                marginBottom: 20,
+              }}
+            >
+              Found Articles
+            </Typography>
+            <Grid container direction="row" style={{ display: "flex" }}>
+              {articles.map((article) => (
+                <Article
+                  imgSrc={article.imgUrl}
+                  title={article.title}
+                  timestamp={article.date}
+                  url={article.url}
+                />
+              ))}
+            </Grid>
+          </>
+        )}
       </Grid>
     </Box>
   ) : (
-    <Grid container style={{ justifyContent: "center", alignItems: "center" }}>
-      <Typography style={{ ...TYPOGRAPHY, fontSize: 44, color: "#838383" }}>
+    <Grid
+      container
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <img
+        src="https://i.kym-cdn.com/entries/icons/facebook/000/029/959/Screen_Shot_2019-06-05_at_1.26.32_PM.jpg"
+        style={{
+          position: "absolute",
+          left: window.innerWidth * 0.26,
+          top: window.innerHeight * 0.09,
+          width: window.innerWidth * 0.74,
+          height: window.innerHeight * 0.91,
+          opacity: 0.3,
+        }}
+      />
+      <Typography style={{ ...TYPOGRAPHY, fontSize: 44, color: "#696969" }}>
         Select a stock
       </Typography>
     </Grid>

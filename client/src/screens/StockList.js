@@ -21,7 +21,7 @@ export default function StockList(props) {
           ticker.toLowerCase().includes(search.toLowerCase()) ||
           data[ticker].details.name.toLowerCase().includes(search.toLowerCase())
       )
-      .sort((a, b) => (data[a].score > data[b].score ? -1 : 1));
+      .sort((a, b) => (data[a].detail.score > data[b].detail.score ? -1 : 1));
     return res;
   };
 
@@ -40,7 +40,7 @@ export default function StockList(props) {
               <ListItem
                 ticker={ticker}
                 name={data[ticker].details.name}
-                score={data[ticker].score}
+                score={data[ticker].detail.score}
                 data={data[ticker]}
                 onClick={selector}
               />

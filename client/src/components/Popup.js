@@ -41,7 +41,7 @@ export default function Popup(props) {
         </Grid>
         <Grid style={{ display: "flex", justifyContent: "center" }}>
           <iframe
-            src="https://blog.bitsrc.io/best-practices-in-using-iframes-with-react-6193feaa1e08"
+            src={article.url}
             width={"90%"}
             height={window.innerHeight * 0.6}
           ></iframe>

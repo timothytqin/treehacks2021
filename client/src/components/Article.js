@@ -4,7 +4,7 @@ import { TYPOGRAPHY, PRIMARY_COLOR } from "../style/css/globalStyles";
 import Popup from "./Popup";
 
 export default function Article(props) {
-  const { imgSrc, title, timestamp } = props;
+  const { imgSrc, title, timestamp, url } = props;
   const [visible, setVisible] = useState(false);
   const styles = {
     container: {
@@ -40,7 +40,9 @@ export default function Article(props) {
       <Grid
         container
         style={{ ...styles.container, borderColor: `#${getRandColor()}` }}
-        onClick={() => setVisible(true)}
+        onClick={() => {
+          window.open(url, "_blank");
+        }}
       >
         <Grid>
           <img src={imgSrc} style={styles.img} />
@@ -64,11 +66,11 @@ export default function Article(props) {
           </Typography>
         </Grid>
       </Grid>
-      <Popup
+      {/* <Popup
         visible={visible}
         setVisible={setVisible}
-        article={(imgSrc, title, timestamp)}
-      />
+        article={(imgSrc, title, timestamp, url)}
+      /> */}
     </>
   );
 }
