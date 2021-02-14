@@ -135,7 +135,7 @@ export default function StockDashboard(props) {
                 </linearGradient>
               </defs>
               <XAxis dataKey="time" type="category" />
-              <YAxis domain={[0, "dataMax + 20"]} />
+              <YAxis />
               <CartesianGrid strokeDasharray="3 3" />
               <Tooltip />
               <Area

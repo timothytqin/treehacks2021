@@ -14,6 +14,7 @@ import { TYPOGRAPHY, PRIMARY_COLOR } from "../style/css/globalStyles";
 import SearchIcon from "@material-ui/icons/Search";
 
 export default function ListSearchBar(props) {
+  const { setSearch } = props;
   const styles = {
     background: {
       backgroundColor: "#E4E4E4",
@@ -43,6 +44,7 @@ export default function ListSearchBar(props) {
           ),
           disableUnderline: true,
         }}
+        onChange={(e) => setSearch(e.target.value)}
       />
     </Grid>
   );

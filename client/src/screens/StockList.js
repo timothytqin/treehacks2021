@@ -1,4 +1,5 @@
 import { Grid, Typography, Box } from "@material-ui/core";
+import { useState, useEffect } from "react";
 
 import ListItem from "../components/ListItem";
 import ListSearchBar from "../components/ListSearchBar";
@@ -11,9 +12,21 @@ export default function StockList(props) {
     },
   };
 
+  const [search, setSearch] = useState("");
+
+  const getFilteredStocks = () => {
+    const res = Object.keys(data).filter(
+      (ticker) =>
+        ticker.toLowerCase().includes(search.toLowerCase()) ||
+        data[ticker].details.name.toLowerCase().includes(search.toLowerCase())
+    );
+    console.log(res);
+    return res;
+  };
+
   return (
     <Grid>
-      <ListSearchBar />
+      <ListSearchBar setSearch={setSearch} />
       <Box
         style={{
           overflowY: "scroll",
@@ -21,7 +34,7 @@ export default function StockList(props) {
         }}
       >
         <Grid container item style={styles.background}>
-          {Object.keys(data).map((ticker) => {
+          {getFilteredStocks().map((ticker) => {
             return (
               <ListItem
                 ticker={ticker}
