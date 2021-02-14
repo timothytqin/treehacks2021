@@ -15,8 +15,9 @@ export default function NavBar(props) {
         position="static"
         elevation={0}
         style={{
-          backgroundColor: PRIMARY_COLOR,
-          height: window.innerHeight * 0.08,
+          backgroundColor: `${PRIMARY_COLOR}80`,
+
+          height: window.innerHeight * 0.09,
           justifyContent: "center",
         }}
       >
@@ -26,7 +27,6 @@ export default function NavBar(props) {
               width: 120,
               height: "100%",
               marginRight: 10,
-              marginBottom: 15,
             }}
             src={logo}
             alt="Lorax"

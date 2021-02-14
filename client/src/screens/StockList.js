@@ -30,7 +30,7 @@ export default function StockList(props) {
       <Box
         style={{
           overflowY: "scroll",
-          height: window.innerHeight * 0.86,
+          height: window.innerHeight * 0.85,
         }}
       >
         <Grid container item style={styles.background}>

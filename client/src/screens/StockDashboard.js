@@ -66,7 +66,7 @@ export default function StockDashboard(props) {
     <Box
       style={{
         overflowY: "scroll",
-        height: window.innerHeight * 0.92,
+        height: window.innerHeight * 0.91,
         flex: 1,
       }}
     >
