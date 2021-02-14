@@ -8,7 +8,7 @@ import {
   Tooltip,
   Area,
 } from "recharts";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, Box } from "@material-ui/core";
 
 import { firestore } from "../firebase/firebase";
 
@@ -57,13 +57,13 @@ export default function StockDashboard(props) {
   };
 
   return (
-    <Grid
-      container
-      style={{
-        flex: 1,
-        padding: "5% 0%",
-      }}
-    >
+    <Box style={{
+      overflowY: 'scroll', 
+      height: window.innerHeight * 0.8,
+      flex: 1,
+      padding: "5% 8%",
+    }}>
+    <Grid container>
       <Grid container direction="row">
         <Grid item style={{ flex: 1 }}>
           <Grid container item style={{ alignItems: "flex-end" }}>
@@ -187,5 +187,6 @@ export default function StockDashboard(props) {
         />
       </Grid>
     </Grid>
+    </Box>
   );
 }
