@@ -16,30 +16,35 @@ import Score from "../components/Score";
 import Metric from "../components/Metric";
 import Article from "../components/Article";
 import { TYPOGRAPHY, PRIMARY_COLOR } from "../style/css/globalStyles";
+import { getCurrPrice, getPriceChange } from "../lib";
 
 export default function StockDashboard(props) {
+  const [details, setDetails] = useState({});
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    firestore
-      .collection("stocks")
-      .doc(props.ticker)
-      .onSnapshot((doc) => {
-        const docData = doc.data();
-        let tempData = [];
-        for (const timestamp in docData.time_data) {
-          const newData = {};
-          newData["time"] = new Date(timestamp).toLocaleDateString();
-          newData["price"] = docData.time_data[timestamp].closing_price;
-          tempData.push(newData);
-        }
+    if (props.ticker) {
+      firestore
+        .collection("stocks")
+        .doc(props.ticker)
+        .onSnapshot((doc) => {
+          const docData = doc.data();
+          setDetails(docData.details);
+          let tempData = [];
+          for (const timestamp in docData.time_data) {
+            const newData = {};
+            newData["time"] = new Date(timestamp).toLocaleDateString();
+            newData["price"] = docData.time_data[timestamp].closing_price;
+            tempData.push(newData);
+          }
 
-        tempData = tempData.sort((a, b) => {
-          return new Date(a.time) < new Date(b.time) ? -1 : 1;
+          tempData = tempData.sort((a, b) => {
+            return new Date(a.time) < new Date(b.time) ? -1 : 1;
+          });
+
+          setData(tempData);
         });
-
-        setData(tempData);
-      });
+    }
   }, [props.ticker]);
 
   const styles = {
@@ -55,12 +60,9 @@ export default function StockDashboard(props) {
     value: {
       marginRight: 20,
     },
-    change: {
-      color: PRIMARY_COLOR,
-    },
   };
 
-  return (
+  return props.ticker ? (
     <Box
       style={{
         overflowY: "scroll",
@@ -73,51 +75,87 @@ export default function StockDashboard(props) {
           <Grid item style={{ flex: 1 }}>
             <Grid container item style={{ alignItems: "flex-end" }}>
               <Typography style={{ ...TYPOGRAPHY, ...styles.tickerName }}>
-                Dow Jones
+                {props.ticker}
               </Typography>
               <Typography style={{ ...TYPOGRAPHY, ...styles.subscript }}>
-                Dow Jones Industrial Average
+                {details.name}
               </Typography>
             </Grid>
-            <Grid container item style={{ marginTop: 20 }}>
-              <Typography style={{ ...TYPOGRAPHY, ...styles.value }}>
-                31,458.40
-              </Typography>
-              <Typography style={{ ...TYPOGRAPHY, ...styles.change }}>
-                +27.70
-              </Typography>
-            </Grid>
+            {data.length > 0 && (
+              <Grid container item style={{ marginTop: 20 }}>
+                <Typography style={{ ...TYPOGRAPHY, ...styles.value }}>
+                  {parseFloat(data[data.length - 1].price).toFixed(2)}
+                </Typography>
+                <Typography
+                  style={{
+                    ...TYPOGRAPHY,
+                    color:
+                      parseFloat(
+                        data[data.length - 1].price - data[0].price
+                      ).toFixed(2) > 0
+                        ? PRIMARY_COLOR
+                        : "#f00",
+                  }}
+                >
+                  {parseFloat(
+                    data[data.length - 1].price - data[data.length - 2].price
+                  ).toFixed(2)}
+                </Typography>
+              </Grid>
+            )}
           </Grid>
           <Grid item>
             <Score score={90} label1={"Positivity"} label2={"Score"} />
           </Grid>
         </Grid>
-        <Grid container>
-          <AreaChart
-            width={window.innerWidth * 0.55}
-            height={350}
-            data={data}
-            margin={{ top: 50 }}
-          >
-            <defs>
-              <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={PRIMARY_COLOR} stopOpacity={0.8} />
-                <stop offset="95%" stopColor={PRIMARY_COLOR} stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <XAxis dataKey="time" type="category" />
-            <YAxis />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Tooltip />
-            <Area
-              type="monotone"
-              dataKey="price"
-              stroke={PRIMARY_COLOR}
-              fillOpacity={1}
-              fill="url(#colorUv)"
-            />
-          </AreaChart>
-        </Grid>
+        {data.length > 0 && (
+          <Grid container>
+            <AreaChart
+              width={window.innerWidth * 0.55}
+              height={350}
+              data={data}
+              margin={{ top: 50 }}
+            >
+              <defs>
+                <linearGradient id="green" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor={PRIMARY_COLOR}
+                    stopOpacity={0.8}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor={PRIMARY_COLOR}
+                    stopOpacity={0}
+                  />
+                </linearGradient>
+                <linearGradient id="red" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor={"#f00"} stopOpacity={0.8} />
+                  <stop offset="95%" stopColor={"#f00"} stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <XAxis dataKey="time" type="category" />
+              <YAxis domain={[0, "dataMax + 20"]} />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Tooltip />
+              <Area
+                type="monotone"
+                dataKey="price"
+                stroke={
+                  data[data.length - 1].price - data[0].price > 0
+                    ? PRIMARY_COLOR
+                    : "#f00"
+                }
+                fillOpacity={1}
+                fill={`url(#${
+                  data[data.length - 1].price - data[0].price > 0
+                    ? "green"
+                    : "red"
+                })`}
+              />
+            </AreaChart>
+          </Grid>
+        )}
         <Typography
           style={{
             ...TYPOGRAPHY,
@@ -193,5 +231,11 @@ export default function StockDashboard(props) {
         </Grid>
       </Grid>
     </Box>
+  ) : (
+    <Grid container style={{ justifyContent: "center", alignItems: "center" }}>
+      <Typography style={{ ...TYPOGRAPHY, fontSize: 44, color: "#838383" }}>
+        Select a stock
+      </Typography>
+    </Grid>
   );
 }

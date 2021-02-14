@@ -6,6 +6,7 @@ import Search from "@material-ui/icons/Search";
 import Typography from "@material-ui/core/Typography";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { TYPOGRAPHY, PRIMARY_COLOR } from "../style/css/globalStyles";
+import logo from "../style/assets/logo.png";
 
 export default function NavBar(props) {
   return (
@@ -20,18 +21,19 @@ export default function NavBar(props) {
         }}
       >
         <Toolbar>
-          <div
+          <img
             style={{
-              width: 70,
+              width: 120,
               height: "100%",
-              backgroundColor: "#ff00ff",
               marginRight: 10,
+              marginBottom: 15,
             }}
-            alt="AA"
+            src={logo}
+            alt="Lorax"
           />
-          <Typography style={{ ...TYPOGRAPHY, fontSize: 36 }}>
+          {/* <Typography style={{ ...TYPOGRAPHY, fontSize: 36 }}>
             Lorax.ly
-          </Typography>
+          </Typography> */}
         </Toolbar>
       </AppBar>
     </div>

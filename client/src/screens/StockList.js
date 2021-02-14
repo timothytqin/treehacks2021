@@ -25,6 +25,7 @@ export default function StockList(props) {
             return (
               <ListItem
                 ticker={ticker}
+                name={data[ticker].details.name}
                 data={data[ticker]}
                 onClick={selector}
               />

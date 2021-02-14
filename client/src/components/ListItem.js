@@ -3,19 +3,17 @@ import { useEffect, useState } from "react";
 import { Grid, Typography } from "@material-ui/core";
 
 import { TYPOGRAPHY, PRIMARY_COLOR } from "../style/css/globalStyles";
+import { getCurrPrice, getPriceChange } from "../lib";
 
 import TinyChartListItem from "./TinyChartListItem";
 import { CallMerge } from "@material-ui/icons";
 
 export default function ListItem(props) {
-  const { ticker, data, onClick } = props;
+  const { ticker, name, data, onClick } = props;
   const styles = {
     background: {
       backgroundColor: "#F3F3F3",
       width: window.innerWidth * 0.25,
-      // border: 'solid',
-      // borderColor: '#D5D5D5',
-      // borderWidth: '0 0 1px',
       borderBottom: "1px solid #D5D5D5",
     },
     score: {
@@ -83,7 +81,7 @@ export default function ListItem(props) {
             ...styles.fullName,
           }}
         >
-          Dow Jones Industrial Average
+          {name}
         </Typography>
       </Grid>
 
@@ -91,7 +89,12 @@ export default function ListItem(props) {
         container
         style={{ flex: 1.5, justifyContent: "center", alignItems: "center" }}
       >
-        <TinyChartListItem />
+        {data && (
+          <TinyChartListItem
+            data={data}
+            color={getPriceChange(data.time_data) > 0 ? PRIMARY_COLOR : "#f00"}
+          />
+        )}
       </Grid>
 
       <Grid
@@ -110,12 +113,13 @@ export default function ListItem(props) {
             ...styles.name,
           }}
         >
-          31,458.40
+          {getCurrPrice(data.time_data)}
         </Typography>
         <Grid
           container
           style={{
-            backgroundColor: PRIMARY_COLOR,
+            backgroundColor:
+              getPriceChange(data.time_data) > 0 ? PRIMARY_COLOR : "#f00",
             justifyContent: "center",
             width: 50,
             borderRadius: 5,
@@ -128,7 +132,7 @@ export default function ListItem(props) {
               color: "#ffffff",
             }}
           >
-            +27.7
+            {getPriceChange(data.time_data)}
           </Typography>
         </Grid>
       </Grid>
