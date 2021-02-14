@@ -1,5 +1,7 @@
+import airbnb from "../fonts/AirbnbCerealBold.ttf";
+
 export const TYPOGRAPHY = {
-  fontFamily: "Montserrat",
+  fontFamily: airbnb,
   fontWeight: "bold",
   fontSize: 18,
 };

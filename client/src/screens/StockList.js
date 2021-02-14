@@ -1,52 +1,43 @@
-import { useEffect, useState } from "react";
-
-import {
-  AreaChart,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Area,
-} from "recharts";
 import { Grid, Typography, Box } from "@material-ui/core";
 
 import ListItem from "../components/ListItem";
 import ListSearchBar from "../components/ListSearchBar";
 
 export default function StockList(props) {
-
   const styles = {
     background: {
-        // backgroundColor: 'gray',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        flex: 0.3,
+      flexDirection: "column",
     },
   };
 
   return (
-    <Box style={{overflow: 'hidden', maxHeight: window.innerHeight,}}>
-    <Grid container item style={styles.background}>
-        <ListSearchBar/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-        <ListItem/>
-
+    <Grid>
+      <ListSearchBar />
+      <Box
+        style={{
+          overflowY: "scroll",
+          height: window.innerHeight * 0.86,
+        }}
+      >
+        <Grid container item style={styles.background}>
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+          <ListItem />
+        </Grid>
+      </Box>
     </Grid>
-    </Box>
-
   );
 }
