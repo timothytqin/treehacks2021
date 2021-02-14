@@ -23,6 +23,7 @@ export default function StockDashboard(props) {
   const [details, setDetails] = useState({});
   const [data, setData] = useState([]);
   const [articles, setArticles] = useState([]);
+  const [score, setScore] = useState();
 
   useEffect(() => {
     if (props.ticker) {
@@ -33,6 +34,7 @@ export default function StockDashboard(props) {
           const docData = doc.data();
           setDetails(docData.details);
           setArticles(docData.articles);
+          setScore(docData.detail.score);
           let tempData = [];
           for (const timestamp in docData.time_data) {
             const newData = {};
@@ -108,7 +110,7 @@ export default function StockDashboard(props) {
             )}
           </Grid>
           <Grid item>
-            <Score score={90} label1={"Positivity"} label2={"Score"} />
+            <Score score={score} label1={"Positivity"} label2={"Score"} />
           </Grid>
         </Grid>
         {data.length > 0 && (
@@ -173,7 +175,7 @@ export default function StockDashboard(props) {
         </Typography>
         <Grid container direction="row">
           <Metric
-            score={85}
+            score={score + 1}
             label1={"Environment"}
             label2={"Impact"}
             bullets={[
@@ -185,7 +187,7 @@ export default function StockDashboard(props) {
             ]}
           />
           <Metric
-            score={89}
+            score={score - 2}
             label1={"Labor"}
             label2={"Practices"}
             bullets={[
@@ -195,7 +197,7 @@ export default function StockDashboard(props) {
             ]}
           />
           <Metric
-            score={97}
+            score={score + 1}
             label1={"Social"}
             label2={"Impact"}
             bullets={[

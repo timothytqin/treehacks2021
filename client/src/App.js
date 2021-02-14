@@ -25,7 +25,7 @@ function App() {
         stocks.docs.forEach((stockDoc) => {
           newStockData[stockDoc.id] = {
             ...stockDoc.data(),
-            detail: { ...stockDoc.data().detail, score: getRandInt(45, 99) },
+            detail: { ...stockDoc.data().detail, score: getRandInt(30, 95) },
           };
           if (
             stockDoc.id == "MSFT" ||
@@ -36,9 +36,10 @@ function App() {
           ) {
             newStockData[stockDoc.id].detail.score = Math.max(
               newStockData[stockDoc.id].detail.score,
-              getRandInt(80, 99)
+              getRandInt(90, 99)
             );
           }
+          stockDoc.ref.update(newStockData[stockDoc.id]);
         });
         setStockData(newStockData);
       });

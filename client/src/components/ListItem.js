@@ -51,7 +51,7 @@ export default function ListItem(props) {
           style={{
             ...TYPOGRAPHY,
             ...styles.score,
-            color: score <= 50 ? "#f00" : score <= 70 ? "#fc0" : PRIMARY_COLOR,
+            color: score <= 50 ? "#f00" : score <= 80 ? "#fc0" : PRIMARY_COLOR,
           }}
         >
           {score}
