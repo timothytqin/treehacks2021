@@ -1,9 +1,7 @@
-import * as firebase from "firebase";
-import "firebase/app";
-import "firebase/firestore";
-
+import firebase from "firebase";
 import { firebaseConfig } from "./firebaseConfig";
 
 firebase.initializeApp(firebaseConfig);
+const firestore = firebase.firestore();
 
-export default firebase;
+export { firebase, firestore };

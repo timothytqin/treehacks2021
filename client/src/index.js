@@ -8,7 +8,7 @@ import NavBar from "./components/NavBar";
 
 ReactDOM.render(
   <Router>
-    <Route path="/" component={NavBar} />
+    {/* <Route path="/" component={NavBar} /> */}
     <Switch>
       <Route exact path="/" component={App} />
     </Switch>

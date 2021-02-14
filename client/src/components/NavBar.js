@@ -9,7 +9,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 export default function NavBar(props) {
   return (
     <div>
-      <AppBar position="fixed" color="#fff">
+      <AppBar position="fixed">
         <Toolbar>
           <div style={{ width: "12em", backgroundColor: "#ff00ff" }} alt="AA" />
           <Typography>Application Name</Typography>
