@@ -26,13 +26,19 @@ export default function StockDashboard(props) {
       .doc(props.ticker)
       .onSnapshot((doc) => {
         const docData = doc.data();
-        const tempData = [];
+        let tempData = [];
         for (const timestamp in docData.time_data) {
           const newData = {};
-          newData["time"] = timestamp;
-          newData["price"] = docData.time_data[timestamp].price;
+          newData["time"] = new Date(timestamp).toLocaleDateString();
+          newData["price"] = docData.time_data[timestamp].closing_price;
           tempData.push(newData);
         }
+
+        tempData = tempData.sort((a, b) => {
+          return new Date(a.time) < new Date(b.time) ? -1 : 1;
+        });
+
+        console.log(tempData);
         setData(tempData);
       });
   }, []);
@@ -100,7 +106,7 @@ export default function StockDashboard(props) {
               <stop offset="95%" stopColor={PRIMARY_COLOR} stopOpacity={0} />
             </linearGradient>
           </defs>
-          <XAxis dataKey="time" type="number" />
+          <XAxis dataKey="time" type="category" />
           <YAxis />
           <CartesianGrid strokeDasharray="3 3" />
           <Tooltip />

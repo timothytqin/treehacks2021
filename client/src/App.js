@@ -1,5 +1,10 @@
+import { useEffect } from "react";
 import StockDashboard from "./screens/StockDashboard";
 import StockList from "./screens/StockList";
+
+import { firestore } from "./firebase/firebase";
+
+
 
 function App() {
 
@@ -10,10 +15,12 @@ function App() {
     },
   };
 
+
+
   return (
     <div className="App" style={styles.page}>
       <StockList />
-      <StockDashboard ticker="GME" />
+      <StockDashboard ticker="MSFT" />
     </div>
   );
 }
