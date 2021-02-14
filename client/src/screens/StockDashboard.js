@@ -61,7 +61,7 @@ export default function StockDashboard(props) {
       container
       style={{
         flex: 1,
-        padding: "5% 25%",
+        padding: "5% 0%",
       }}
     >
       <Grid container direction="row">
@@ -87,30 +87,32 @@ export default function StockDashboard(props) {
           <Score score={90} label1={"Positivity"} label2={"Score"} />
         </Grid>
       </Grid>
-      <AreaChart
-        width={window.innerWidth * 0.55}
-        height={350}
-        data={data}
-        margin={{ top: 50, right: 70, left: -20, bottom: 0 }}
-      >
-        <defs>
-          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor={PRIMARY_COLOR} stopOpacity={0.8} />
-            <stop offset="95%" stopColor={PRIMARY_COLOR} stopOpacity={0} />
-          </linearGradient>
-        </defs>
-        <XAxis dataKey="time" type="number" />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
-        <Area
-          type="monotone"
-          dataKey="price"
-          stroke={PRIMARY_COLOR}
-          fillOpacity={1}
-          fill="url(#colorUv)"
-        />
-      </AreaChart>
+      <Grid container>
+        <AreaChart
+          width={window.innerWidth * 0.55}
+          height={350}
+          data={data}
+          margin={{ top: 50, right: 70, left: -20, bottom: 0 }}
+        >
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor={PRIMARY_COLOR} stopOpacity={0.8} />
+              <stop offset="95%" stopColor={PRIMARY_COLOR} stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <XAxis dataKey="time" type="number" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Area
+            type="monotone"
+            dataKey="price"
+            stroke={PRIMARY_COLOR}
+            fillOpacity={1}
+            fill="url(#colorUv)"
+          />
+        </AreaChart>
+      </Grid>
       <Typography
         style={{
           ...TYPOGRAPHY,
