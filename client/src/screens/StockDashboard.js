@@ -12,6 +12,8 @@ import { Grid, Typography } from "@material-ui/core";
 
 import { firestore } from "../firebase/firebase";
 
+import Score from "../components/Score";
+
 export default function StockDashboard(props) {
   const [data, setData] = useState([]);
 
@@ -32,6 +34,30 @@ export default function StockDashboard(props) {
       });
   }, []);
 
+  const styles = {
+    typography: {
+      fontFamily: "Montserrat",
+      fontWeight: "bold",
+      fontSize: 18,
+    },
+    tickerName: {
+      fontSize: 44,
+      lineHeight: 1,
+      marginRight: 25,
+    },
+    subscript: {
+      fontSize: 14,
+      fontWeight: "500",
+      color: "#838383",
+    },
+    value: {
+      marginRight: 20,
+    },
+    change: {
+      color: "#5BC096",
+    },
+  };
+
   return (
     <Grid
       container
@@ -42,36 +68,26 @@ export default function StockDashboard(props) {
       }}
     >
       <Grid container direction="row">
-        <Grid item style={{ flex: 1, }}>
-          <Grid container item style={{ alignItems: 'flex-end' }}>
-            <Typography style={{fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: 44, lineHeight: 1, marginRight: 25}}>DOW Jones</Typography>
-            <Typography style={{fontFamily: 'Montserrat', fontWeight: '500', fontSize: 14, color: '#838383'}}>Dow Jones Industrial Average</Typography>
+        <Grid item style={{ flex: 1 }}>
+          <Grid container item style={{ alignItems: "flex-end" }}>
+            <Typography style={{ ...styles.typography, ...styles.tickerName }}>
+              DOW Jones
+            </Typography>
+            <Typography style={{ ...styles.typography, ...styles.subscript }}>
+              Dow Jones Industrial Average
+            </Typography>
           </Grid>
           <Grid container item style={{ marginTop: 20 }}>
-            <Typography style={{fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: 18, lineHeight: 1, marginRight: 25}}>31,458.40</Typography>
-            <Typography style={{fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: 18, lineHeight: 1, color: '#5BC096'}}>+27.70</Typography>
+            <Typography style={{ ...styles.typography, ...styles.value }}>
+              31,458.40
+            </Typography>
+            <Typography style={{ ...styles.typography, ...styles.change }}>
+              +27.70
+            </Typography>
           </Grid>
         </Grid>
         <Grid item>
-          <Grid container style={{ alignItems: 'center' }}>
-            <Grid
-              container
-              style={{
-                width: 80-10,
-                height: 80-10,
-                borderRadius: 50,
-                backgroundColor: "#5BC096",
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              <Typography style={{textAlign: 'center', fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: 36, color: '#ffffff'}}>90</Typography>
-            </Grid>
-            <Grid style={{ marginLeft: 10 }}>
-              <Typography style={{textAlign: 'left', fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: 18}}>Positivity</Typography>
-              <Typography style={{textAlign: 'left', fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: 18}}>Score</Typography>
-            </Grid>
-          </Grid>
+          <Score score={90} label1={"Positivity"} label2={"Score"} />
         </Grid>
       </Grid>
       <AreaChart
