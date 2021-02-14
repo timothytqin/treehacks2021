@@ -38,51 +38,52 @@ export default function StockDashboard(props) {
       style={{
         flex: 1,
         justifyContent: "center",
-        padding: "5% 20%",
+        padding: "5% 25%",
       }}
     >
       <Grid container direction="row">
-        <Grid item style={{ flex: 1, backgroundColor: "#ff00ff" }}>
-          <Grid container item>
-            <Typography>DOW Jones</Typography>
-            <Typography>Dow Jones Industrial Average</Typography>
+        <Grid item style={{ flex: 1, }}>
+          <Grid container item style={{ alignItems: 'flex-end' }}>
+            <Typography style={{fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: 44, lineHeight: 1, marginRight: 25}}>DOW Jones</Typography>
+            <Typography style={{fontFamily: 'Montserrat', fontWeight: '500', fontSize: 14, color: '#838383'}}>Dow Jones Industrial Average</Typography>
           </Grid>
-          <Grid container item>
-            <Typography>31,458.40</Typography>
-            <Typography>+27.70</Typography>
+          <Grid container item style={{ marginTop: 20 }}>
+            <Typography style={{fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: 18, lineHeight: 1, marginRight: 25}}>31,458.40</Typography>
+            <Typography style={{fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: 18, lineHeight: 1, color: '#5BC096'}}>+27.70</Typography>
           </Grid>
         </Grid>
-        <Grid item style={{ backgroundColor: "#00ffff" }}>
-          <Grid container>
+        <Grid item>
+          <Grid container style={{ alignItems: 'center' }}>
             <Grid
+              container
               style={{
-                width: 100,
-                height: 100,
+                width: 80-10,
+                height: 80-10,
                 borderRadius: 50,
-                backgroundColor: "#00ff00",
+                backgroundColor: "#5BC096",
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
-            />
-            <Grid>
-              <Typography>Positivity</Typography>
-              <Typography>Score</Typography>
+            >
+              <Typography style={{textAlign: 'center', fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: 36, color: '#ffffff'}}>90</Typography>
+            </Grid>
+            <Grid style={{ marginLeft: 10 }}>
+              <Typography style={{textAlign: 'left', fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: 18}}>Positivity</Typography>
+              <Typography style={{textAlign: 'left', fontFamily: 'Montserrat', fontWeight: 'bold', fontSize: 18}}>Score</Typography>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
       <AreaChart
-        width={750}
-        height={300}
+        width={window.innerWidth * 0.53}
+        height={350}
         data={data}
-        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+        margin={{ top: 50, right: 30, left: 0, bottom: 0 }}
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-          </linearGradient>
-          <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+            <stop offset="5%" stopColor="#5BC096" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#5BC096" stopOpacity={0} />
           </linearGradient>
         </defs>
         <XAxis dataKey="time" type="number" />
@@ -92,7 +93,7 @@ export default function StockDashboard(props) {
         <Area
           type="monotone"
           dataKey="price"
-          stroke="#8884d8"
+          stroke="#5BC096"
           fillOpacity={1}
           fill="url(#colorUv)"
         />
