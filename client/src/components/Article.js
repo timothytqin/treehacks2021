@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@material-ui/core";
-import { TYPOGRAPHY, PRIMARY_COLOR } from "../globalStyles";
+import { TYPOGRAPHY, PRIMARY_COLOR } from "../style/css/globalStyles";
 
 export default function Article(props) {
   const { imgSrc, title, timestamp } = props;
