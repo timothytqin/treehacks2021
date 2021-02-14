@@ -98,7 +98,7 @@ export default function StockDashboard(props) {
                   }}
                 >
                   {parseFloat(
-                    data[data.length - 1].price - data[data.length - 2].price
+                    data[data.length - 1].price - data[0].price
                   ).toFixed(2)}
                 </Typography>
               </Grid>
