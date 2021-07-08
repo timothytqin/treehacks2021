@@ -25,21 +25,21 @@ function App() {
         stocks.docs.forEach((stockDoc) => {
           newStockData[stockDoc.id] = {
             ...stockDoc.data(),
-            detail: { ...stockDoc.data().detail, score: getRandInt(30, 95) },
+            // detail: { ...stockDoc.data().detail, score: getRandInt(30, 95) },
           };
-          if (
-            stockDoc.id == "MSFT" ||
-            stockDoc.id == "CDNS" ||
-            stockDoc.id == "ZM" ||
-            stockDoc.id == "NVDA" ||
-            stockDoc.id == "GOOG"
-          ) {
-            newStockData[stockDoc.id].detail.score = Math.max(
-              newStockData[stockDoc.id].detail.score,
-              getRandInt(90, 99)
-            );
-          }
-          stockDoc.ref.update(newStockData[stockDoc.id]);
+          // if (
+          //   stockDoc.id == "MSFT" ||
+          //   stockDoc.id == "CDNS" ||
+          //   stockDoc.id == "ZM" ||
+          //   stockDoc.id == "NVDA" ||
+          //   stockDoc.id == "GOOG"
+          // ) {
+          //   newStockData[stockDoc.id].detail.score = Math.max(
+          //     newStockData[stockDoc.id].detail.score,
+          //     getRandInt(90, 99)
+          //   );
+          // }
+          // stockDoc.ref.update(newStockData[stockDoc.id]);
         });
         setStockData(newStockData);
       });
